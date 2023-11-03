@@ -42,17 +42,17 @@ def linear_regression(df, features, export):
     return mae
 
 
-def get_average_error_among_all_clusters_with_linear_regression(df, features):
-    cluster_0 = get_dataframes_with_amount_per_cluster(df, 0)
-    cluster_1 = get_dataframes_with_amount_per_cluster(df, 1)
-    cluster_2 = get_dataframes_with_amount_per_cluster(df, 2)
-    cluster_3 = get_dataframes_with_amount_per_cluster(df, 3)
-    cluster_4 = get_dataframes_with_amount_per_cluster(df, 4)
-    cluster_5 = get_dataframes_with_amount_per_cluster(df, 5)
-    cluster_6 = get_dataframes_with_amount_per_cluster(df, 6)
-    cluster_7 = get_dataframes_with_amount_per_cluster(df, 7)
-    cluster_8 = get_dataframes_with_amount_per_cluster(df, 8)
-    cluster_9 = get_dataframes_with_amount_per_cluster(df, 9)
+def get_average_error_among_all_clusters_with_linear_regression(df, features, sample_relation):
+    cluster_0 = get_dataframes_with_amount_per_cluster(df, 0, sample_relation)
+    cluster_1 = get_dataframes_with_amount_per_cluster(df, 1, sample_relation)
+    cluster_2 = get_dataframes_with_amount_per_cluster(df, 2, sample_relation)
+    cluster_3 = get_dataframes_with_amount_per_cluster(df, 3, sample_relation)
+    cluster_4 = get_dataframes_with_amount_per_cluster(df, 4, sample_relation)
+    cluster_5 = get_dataframes_with_amount_per_cluster(df, 5, sample_relation)
+    cluster_6 = get_dataframes_with_amount_per_cluster(df, 6, sample_relation)
+    cluster_7 = get_dataframes_with_amount_per_cluster(df, 7, sample_relation)
+    cluster_8 = get_dataframes_with_amount_per_cluster(df, 8, sample_relation)
+    cluster_9 = get_dataframes_with_amount_per_cluster(df, 9, sample_relation)
 
     cluster_dfs = [cluster_0, cluster_1, cluster_2, cluster_3, cluster_4, cluster_5, cluster_6, cluster_7, cluster_8, cluster_9]
     maes = []
@@ -119,17 +119,17 @@ def random_forest_regression(df, features, max_depth, export):
     return mae
 
 
-def get_average_error_among_all_clusters_with_random_forest_regression(df):
-    cluster_0 = get_dataframes_with_amount_per_cluster(df, 0)
-    cluster_1 = get_dataframes_with_amount_per_cluster(df, 1)
-    cluster_2 = get_dataframes_with_amount_per_cluster(df, 2)
-    cluster_3 = get_dataframes_with_amount_per_cluster(df, 3)
-    cluster_4 = get_dataframes_with_amount_per_cluster(df, 4)
-    cluster_5 = get_dataframes_with_amount_per_cluster(df, 5)
-    cluster_6 = get_dataframes_with_amount_per_cluster(df, 6)
-    cluster_7 = get_dataframes_with_amount_per_cluster(df, 7)
-    cluster_8 = get_dataframes_with_amount_per_cluster(df, 8)
-    cluster_9 = get_dataframes_with_amount_per_cluster(df, 9)
+def get_average_error_among_all_clusters_with_random_forest_regression(df, sample_relation):
+    cluster_0 = get_dataframes_with_amount_per_cluster(df, 0, sample_relation)
+    cluster_1 = get_dataframes_with_amount_per_cluster(df, 1, sample_relation)
+    cluster_2 = get_dataframes_with_amount_per_cluster(df, 2, sample_relation)
+    cluster_3 = get_dataframes_with_amount_per_cluster(df, 3, sample_relation)
+    cluster_4 = get_dataframes_with_amount_per_cluster(df, 4, sample_relation)
+    cluster_5 = get_dataframes_with_amount_per_cluster(df, 5, sample_relation)
+    cluster_6 = get_dataframes_with_amount_per_cluster(df, 6, sample_relation)
+    cluster_7 = get_dataframes_with_amount_per_cluster(df, 7, sample_relation)
+    cluster_8 = get_dataframes_with_amount_per_cluster(df, 8, sample_relation)
+    cluster_9 = get_dataframes_with_amount_per_cluster(df, 9, sample_relation)
 
     mae_cluster_0 = random_forest_regression(cluster_0, ['Hour'], 3, False)
     mae_cluster_1 = random_forest_regression(cluster_1, ['Hour'], 3, False)

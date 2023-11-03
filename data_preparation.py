@@ -1,4 +1,5 @@
 import geopandas as gpd
+import pandas as pd
 from shapely import Point
 from datetime import datetime
 from sklearn.preprocessing import LabelEncoder
@@ -72,10 +73,14 @@ def label_encode_column(df, column):
     return df
 
 
-def get_dataframes_with_amount_per_cluster(df, cluster):
+def get_dataframes_with_amount_per_cluster(df, cluster, sample_relation):
     df = df[df['cluster'] == cluster]
     amount_values = df['Hour'].value_counts()
-    df['Amount'] = df['Hour'].map(amount_values)
+    month_range = len(df['Month'].unique())
+    day_range = len(df['Day'].unique())
+    amount_per_hour_over_months_and_days = [(amount*sample_relation)/(month_range*day_range) for amount in amount_values]
+    adjusted_amount_values = pd.Series(amount_per_hour_over_months_and_days, index=amount_values.keys())
+    df['Amount'] = df['Hour'].map(adjusted_amount_values)
     df = df.reset_index(drop=True)
 
     return df
