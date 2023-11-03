@@ -49,7 +49,9 @@ final_df = label_encode_column(final_df, 'Base')
 #
 clustered_df, centroids_longitude, centroids_latitude = kmeans_clustering(final_df, ['Lat', 'Lon'], True)
 cluster_center_coordinates = list(zip(centroids_latitude, centroids_longitude))
-print(f'Cluster center coordinates: {cluster_center_coordinates}')
+print('Cluster center coordinates:')
+for c in cluster_center_coordinates:
+    print(c)
 plot_clusters_on_map(clustered_df, centroids_longitude, centroids_latitude)
 
 # Regression

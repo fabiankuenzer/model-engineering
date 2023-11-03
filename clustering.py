@@ -23,7 +23,7 @@ def agglomerative_clustering(df, columns):
     agg = AgglomerativeClustering(n_clusters=10)
     df['cluster'] = agg.fit_predict(df[columns])
     silhouette_avg = silhouette_score(df[columns], df['cluster'])
-    print(f"Silhouette score for AgglomerativeClustering and {columns} is : {silhouette_avg}")
+    print(f"Silhouette score AgglomerativeClustering and {columns} is : {silhouette_avg}")
 
     labels = agg.labels_
     centroids = np.zeros((max(labels) + 1, df[columns].shape[1]))
