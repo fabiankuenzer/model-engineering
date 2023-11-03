@@ -3,6 +3,7 @@ from data_exploration import *
 from data_preparation import *
 from clustering import *
 from regression import *
+from predict import *
 
 raw_data = load_data()
 sample_size = 10000  # only for quick presentation purposes, remove for producing actual models
@@ -122,4 +123,15 @@ random_forest_regression(cluster_7, ['Hour'], 4, True)
 random_forest_regression(cluster_8, ['Hour'], 4, True)
 random_forest_regression(cluster_9, ['Hour'], 4, True)
 
-get_average_error_among_all_clusters_with_random_forest_regression(clustered_df)
+get_average_error_among_all_clusters_with_random_forest_regression(clustered_df, sample_relation)
+
+daily_demand_prediction_per_hour('cluster_0_regressor.joblib')
+daily_demand_prediction_per_hour('cluster_1_regressor.joblib')
+daily_demand_prediction_per_hour('cluster_2_regressor.joblib')
+daily_demand_prediction_per_hour('cluster_3_regressor.joblib')
+daily_demand_prediction_per_hour('cluster_4_regressor.joblib')
+daily_demand_prediction_per_hour('cluster_5_regressor.joblib')
+daily_demand_prediction_per_hour('cluster_6_regressor.joblib')
+daily_demand_prediction_per_hour('cluster_7_regressor.joblib')
+daily_demand_prediction_per_hour('cluster_8_regressor.joblib')
+daily_demand_prediction_per_hour('cluster_9_regressor.joblib')
