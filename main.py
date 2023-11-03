@@ -33,21 +33,25 @@ raw_data = raw_data.sample(sample_size)
 # plot_pickups_on_map_per_base(raw_data, 'B02512')
 
 # Data preparation
+print('PREPARE DATA: START')
 filtered_df = remove_pickups_outside_of_nyc(raw_data)
 # plot_pickups_on_map(filtered_df)
 final_df = append_weekday_column(filtered_df)
 final_df = append_date_time_columns(final_df)
 final_df = append_weekend_column(final_df)
 final_df = label_encode_column(final_df, 'Base')
+print('PREPARE DATA: DONE')
 
 # Modelling
 # Clustering
+print('CLUSTER ALGORITHM AND FEATURE PERFORMANCE COMPARISON')
 clustering_features = ['Lat', 'Lon', 'Weekday', 'Base', 'Month', 'Hour', 'Day', 'Minute', 'Weekend']
 feature_sub_lists = get_sub_lists(clustering_features)[:-1]
 for sub_list in feature_sub_lists:
     kmeans_clustering(final_df, sub_list, False)
 for sub_list in feature_sub_lists:
     agglomerative_clustering(final_df, sub_list)
+print('CHOOSE KMEANS')
 
 clustered_df, centroids_longitude, centroids_latitude = kmeans_clustering(final_df, ['Lat', 'Lon'], True)
 cluster_center_coordinates = list(zip(centroids_latitude, centroids_longitude))
@@ -68,6 +72,7 @@ cluster_7 = get_dataframes_with_amount_per_cluster(clustered_df, 7, sample_relat
 cluster_8 = get_dataframes_with_amount_per_cluster(clustered_df, 8, sample_relation)
 cluster_9 = get_dataframes_with_amount_per_cluster(clustered_df, 9, sample_relation)
 
+print('LINEAR REGRESSION FEATURE IMPORTANCE: START')
 regression_feature_importance(cluster_0, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
 regression_feature_importance(cluster_1, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
 regression_feature_importance(cluster_2, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
@@ -78,7 +83,9 @@ regression_feature_importance(cluster_6, ['Lat', 'Lon', 'Base', 'Weekday', 'Mont
 regression_feature_importance(cluster_7, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
 regression_feature_importance(cluster_8, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
 regression_feature_importance(cluster_9, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+print('LINEAR REGRESSION FEATURE IMPORTANCE: DONE')
 
+print('LINEAR REGRESSION PERFORMANCE: START')
 linear_regression(cluster_0, ['Lat', 'Lon', 'Weekend'], False)
 linear_regression(cluster_1, ['Lat', 'Lon', 'Hour'], False)
 linear_regression(cluster_2, ['Lat', 'Lon', 'Hour'], False)
@@ -89,9 +96,13 @@ linear_regression(cluster_6, ['Lat', 'Lon', 'Hour'], False)
 linear_regression(cluster_7, ['Lat', 'Lon', 'Hour'], False)
 linear_regression(cluster_8, ['Lat', 'Lon', 'Hour'], False)
 linear_regression(cluster_9, ['Lat', 'Lon', 'Hour'], False)
+print('LINEAR REGRESSION PERFORMANCE: DONE')
 
+print('FINAL LINEAR REGRESSION FEATURE IMPORTANCE: START')
 get_average_error_among_all_clusters_with_linear_regression(clustered_df, ['Lat', 'Lon', 'Hour'], sample_relation)
+print('FINAL LINEAR REGRESSION FEATURE IMPORTANCE: DONE')
 
+print('RANDOM FOREST REGRESSOR FEATURE IMPORTANCE: START')
 random_forest_feature_importance(cluster_0, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'], 4)
 random_forest_feature_importance(cluster_1, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'], 4)
 random_forest_feature_importance(cluster_2, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'], 4)
@@ -102,7 +113,9 @@ random_forest_feature_importance(cluster_6, ['Lat', 'Lon', 'Base', 'Weekday', 'M
 random_forest_feature_importance(cluster_7, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'], 4)
 random_forest_feature_importance(cluster_8, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'], 4)
 random_forest_feature_importance(cluster_9, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'], 4)
+print('RANDOM FOREST REGRESSOR FEATURE IMPORTANCE: DONE')
 
+print('RANDOM FOREST REGRESSOR PARAMETER TUNING: START')
 random_forest_regression_parameter_tuning(cluster_0, ['Hour'])
 random_forest_regression_parameter_tuning(cluster_1, ['Hour'])
 random_forest_regression_parameter_tuning(cluster_2, ['Hour'])
@@ -113,7 +126,9 @@ random_forest_regression_parameter_tuning(cluster_6, ['Hour'])
 random_forest_regression_parameter_tuning(cluster_7, ['Hour'])
 random_forest_regression_parameter_tuning(cluster_8, ['Hour'])
 random_forest_regression_parameter_tuning(cluster_9, ['Hour'])
+print('RANDOM FOREST REGRESSOR PARAMETER TUNING: DONE')
 
+print('RANDOM FOREST REGRESSOR PERFORMANCE: START')
 random_forest_regression(cluster_0, ['Hour'], 4, True)
 random_forest_regression(cluster_1, ['Hour'], 4, True)
 random_forest_regression(cluster_2, ['Hour'], 4, True)
@@ -124,9 +139,14 @@ random_forest_regression(cluster_6, ['Hour'], 4, True)
 random_forest_regression(cluster_7, ['Hour'], 4, True)
 random_forest_regression(cluster_8, ['Hour'], 4, True)
 random_forest_regression(cluster_9, ['Hour'], 4, True)
+print('RANDOM FOREST REGRESSOR PERFORMANCE: DONE')
 
+print('FINAL RANDOM FOREST REGRESSOR PERFORMANCE: START')
 get_average_error_among_all_clusters_with_random_forest_regression(clustered_df, sample_relation)
+print('FINAL RANDOM FOREST REGRESSOR PERFORMANCE: DONE')
 
+
+print('PRODUCE PREDICTIONS WITH RANDOM FOREST REGRESSOR: START')
 daily_demand_prediction_per_hour('cluster_0_regressor.joblib')
 daily_demand_prediction_per_hour('cluster_1_regressor.joblib')
 daily_demand_prediction_per_hour('cluster_2_regressor.joblib')
@@ -137,3 +157,5 @@ daily_demand_prediction_per_hour('cluster_6_regressor.joblib')
 daily_demand_prediction_per_hour('cluster_7_regressor.joblib')
 daily_demand_prediction_per_hour('cluster_8_regressor.joblib')
 daily_demand_prediction_per_hour('cluster_9_regressor.joblib')
+print('PRODUCE PREDICTIONS WITH RANDOM FOREST REGRESSOR: DONE')
+print('VIEW PRODUCED VISUALIZATIONS AND MODELS: ls')
