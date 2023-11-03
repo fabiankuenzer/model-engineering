@@ -4,6 +4,8 @@ from data_preparation import *
 from clustering import *
 from regression import *
 from predict import *
+import warnings
+warnings.simplefilter(action='ignore', category=Warning)
 
 raw_data = load_data()
 sample_size = 10000  # only for quick presentation purposes, remove for producing actual models
