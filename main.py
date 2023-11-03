@@ -39,14 +39,13 @@ final_df = label_encode_column(final_df, 'Base')
 
 # Modelling
 # Clustering
-# clustering_features = ['Lat', 'Lon', 'Weekday', 'Base', 'Month', 'Hour', 'Day', 'Minute', 'Weekend']
-# feature_sub_lists = get_sub_lists(clustering_features)[:-1]
-#
-# for sub_list in feature_sub_lists:
-#     kmeans_clustering(final_df, sub_list)
-# for sub_list in feature_sub_lists:
-#     agglomerative_clustering(final_df, sub_list)
-#
+clustering_features = ['Lat', 'Lon', 'Weekday', 'Base', 'Month', 'Hour', 'Day', 'Minute', 'Weekend']
+feature_sub_lists = get_sub_lists(clustering_features)[:-1]
+for sub_list in feature_sub_lists:
+    kmeans_clustering(final_df, sub_list, False)
+for sub_list in feature_sub_lists:
+    agglomerative_clustering(final_df, sub_list)
+
 clustered_df, centroids_longitude, centroids_latitude = kmeans_clustering(final_df, ['Lat', 'Lon'], True)
 cluster_center_coordinates = list(zip(centroids_latitude, centroids_longitude))
 print('Cluster center coordinates:')
@@ -66,16 +65,16 @@ cluster_7 = get_dataframes_with_amount_per_cluster(clustered_df, 7, sample_relat
 cluster_8 = get_dataframes_with_amount_per_cluster(clustered_df, 8, sample_relation)
 cluster_9 = get_dataframes_with_amount_per_cluster(clustered_df, 9, sample_relation)
 
-# regression_feature_importance(cluster_0, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
-# regression_feature_importance(cluster_1, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
-# regression_feature_importance(cluster_2, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
-# regression_feature_importance(cluster_3, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
-# regression_feature_importance(cluster_4, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
-# regression_feature_importance(cluster_5, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
-# regression_feature_importance(cluster_6, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
-# regression_feature_importance(cluster_7, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
-# regression_feature_importance(cluster_8, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
-# regression_feature_importance(cluster_9, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+regression_feature_importance(cluster_0, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+regression_feature_importance(cluster_1, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+regression_feature_importance(cluster_2, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+regression_feature_importance(cluster_3, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+regression_feature_importance(cluster_4, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+regression_feature_importance(cluster_5, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+regression_feature_importance(cluster_6, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+regression_feature_importance(cluster_7, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+regression_feature_importance(cluster_8, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
+regression_feature_importance(cluster_9, ['Lat', 'Lon', 'Base', 'Weekday', 'Month', 'Day', 'Hour', 'Minute', 'Weekend'])
 
 linear_regression(cluster_0, ['Lat', 'Lon', 'Weekend'], False)
 linear_regression(cluster_1, ['Lat', 'Lon', 'Hour'], False)
