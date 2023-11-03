@@ -19,10 +19,11 @@ def regression_feature_importance(df, features):
     plt.figure(figsize=(10, 6))
     plt.barh(features, feature_importances)
     plt.xlabel('Importance')
-    plt.show()
+    plt.savefig(f'Feature importance LinearRegression cluster {str(df["cluster"].unique()).strip("[]")}')
+    plt.close()
 
 
-def linear_regression(df, features):
+def linear_regression(df, features, export):
     X = df[features]
     y = df['Amount']
 
@@ -30,6 +31,8 @@ def linear_regression(df, features):
 
     model = LinearRegression()
     model.fit(X_train, y_train)
+    if export:
+        joblib.dump(model, f'cluster_{str(df["cluster"].unique()).strip("[]")}_linear.joblib')
     y_pred = model.predict(X_test)
 
     mae = mean_absolute_error(y_test, y_pred)
@@ -55,7 +58,7 @@ def get_average_error_among_all_clusters_with_linear_regression(df, features):
     maes = []
 
     for dataframe in cluster_dfs:
-        maes.append(linear_regression(dataframe, features))
+        maes.append(linear_regression(dataframe, features, False))
 
     print('Average prediction error per hour per cluster: ', sum(maes)/10)
     print('Average rides per hour per cluster: ', len(df)/(24*10))
@@ -72,7 +75,7 @@ def random_forest_feature_importance(df, features, max_depth):
     plt.figure(figsize=(10, 6))
     plt.barh(features, feature_importances)
     plt.xlabel('Importance')
-    plt.savefig(f'Feature importance cluster {str(df["cluster"].unique()).strip("[]")}')
+    plt.savefig(f'Feature importance RandomRorestRegressor cluster {str(df["cluster"].unique()).strip("[]")}')
     plt.close()
 
 

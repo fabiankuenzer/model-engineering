@@ -218,3 +218,4 @@ def plot_clusters_on_map(df, centroid_longitude, centroid_latitude):
     plt.ylabel("Latitude")
     plt.title("Pickup location cluster centers")
     plt.savefig('Clusters on the map of New York City')
+    plt.close()
