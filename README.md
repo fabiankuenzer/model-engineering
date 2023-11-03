@@ -6,5 +6,5 @@
 runs the following jobs:
 1. Data ingestion.
 2. Data preparation.
-3. Cluster modelling with model and metrics export.
-4. Regression modelling with model metrics export.
+3. Cluster modelling with model and metrics exports.
+4. Regression modelling with model and metrics exports.
