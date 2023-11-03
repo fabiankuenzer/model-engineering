@@ -8,7 +8,7 @@ import warnings
 warnings.simplefilter(action='ignore', category=Warning)
 
 raw_data = load_data()
-sample_size = 10000  # only for quick presentation purposes, remove for producing actual models
+sample_size = 10000  # only for quick presentation purposes, set to 4534327 for complete data
 sample_relation = len(raw_data)/sample_size
 raw_data = raw_data.sample(sample_size)
 
