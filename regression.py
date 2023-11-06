@@ -60,7 +60,7 @@ def get_average_error_among_all_clusters_with_linear_regression(df, features, sa
     for dataframe in cluster_dfs:
         maes.append(linear_regression(dataframe, features, False))
 
-    print('Average rides per hour per cluster: ', int(len(df)/(24*10)))
+    print('Average rides per hour per cluster: ', int(len(df)*sample_relation/(10*6*30.5*24)))
     print('LinearRegression average prediction error per hour per cluster: ', int(sum(maes)/10))
 
 
@@ -143,5 +143,5 @@ def get_average_error_among_all_clusters_with_random_forest_regression(df, sampl
     mae_cluster_9 = random_forest_regression(cluster_9, ['Hour'], 3, False)
 
     maes = [mae_cluster_0, mae_cluster_1, mae_cluster_2, mae_cluster_3, mae_cluster_4, mae_cluster_5, mae_cluster_6, mae_cluster_7, mae_cluster_8, mae_cluster_9]
-    print('Average rides per hour per cluster: ', int(len(df)/(24*10)))
-    print('RandomForestRegressor average prediction error per hour per cluster: ', int(sum(maes) / 10))
+    print('Average rides per hour per cluster: ', int(len(df)*sample_relation/(10*6*30.5*24)))
+    print('RandomForestRegressor average prediction error per hour per cluster: ', int(sum(maes)/10))
