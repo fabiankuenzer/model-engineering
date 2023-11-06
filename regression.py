@@ -113,7 +113,7 @@ def random_forest_regression(df, features, max_depth, export):
         joblib.dump(model, f'cluster_{str(df["cluster"].unique()).strip("[]")}_regressor.joblib')
     y_pred = model.predict(X_test)
     mae = mean_absolute_error(y_test, y_pred)
-    print(f'Average number of rides per hour in cluster {str(df["cluster"].unique()).strip("[]")}: ', int(len(df) / 24))
+    print(f'Average number of rides per hour in cluster {str(df["cluster"].unique()).strip("[]")}: ', int(len(df)/24))
     print('RandomForestRegressor average prediction error per hour:', int(mae))
 
     return mae
