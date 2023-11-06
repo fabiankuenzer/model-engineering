@@ -13,3 +13,4 @@ With the above commands the following jobs are executed:
 All visualizations and models are exported into the root directory and can be listed with the terminal command `ls` or `ll`. 
 For quicker execution the calculations are conducted with a data sample of 10.000 records. 
 The total amount of samples can be changed in `main.py.`. 
+Moreover, the code for the data understanding is commented to speed up execution. It can also be included in the code flow by adjusting the `main.py`. 
